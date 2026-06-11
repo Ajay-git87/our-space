@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Letters ❤️</title>
+
+<style>
+body{
+font-family:Arial;
+background:#fff5f8;
+padding:40px;
+max-width:900px;
+margin:auto;
+}
+
+h1{
+text-align:center;
+}
+
+.letter{
+background:white;
+padding:25px;
+margin:20px 0;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>💌 Our Letters</h1>
+
+<div class="letter">
+<h2>Letter #1</h2>
+
+<p>
+Dear Bubbly,
+
+This is the first letter in Our Space ❤️
+
+One day this page will contain years of memories,
+dreams and moments.
+
+Love,
+Ajay
+</p>
+
+</div>
+
+</body>
+</html>
