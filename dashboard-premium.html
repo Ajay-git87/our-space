@@ -231,6 +231,35 @@ box-shadow:
 0 0 25px rgba(236,72,153,.45);
 transition:.35s ease;
 }
+
+  .digit-wheel{
+width:90px;
+height:90px;
+overflow:hidden;
+border-radius:18px;
+background:
+rgba(255,255,255,.04);
+border:
+1px solid rgba(255,255,255,.08);
+position:relative;
+}
+
+.digit-track{
+position:absolute;
+width:100%;
+transition:
+transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+.digit-track div{
+height:90px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Orbitron',sans-serif;
+font-size:2.8rem;
+font-weight:700;
+}
 </style>
 
 </head>
@@ -289,8 +318,28 @@ Since 27 August 2025
 </div>
 
 <div class="unit">
-<div class="digit" id="secondsDigit">00</div>
+
+<div class="digit-wheel">
+
+<div class="digit-track" id="secondsTrack">
+
+<div>0</div>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+<div>6</div>
+<div>7</div>
+<div>8</div>
+<div>9</div>
+
+</div>
+
+</div>
+
 <div class="label">SECONDS</div>
+
 </div>
 
 </div>
@@ -385,10 +434,7 @@ updateDigit(
 String(minutes).padStart(2,"0")
 );
 
-updateDigit(
-"secondsDigit",
-String(seconds).padStart(2,"0")
-);
+rollSeconds(seconds % 10);
 
 }
 
@@ -407,6 +453,13 @@ void el.offsetWidth;
 el.classList.add("animate");
 }
 }
+    function rollSeconds(value){
+const track =
+document.getElementById("secondsTrack");
+track.style.transform =
+`translateY(-${value*90}px)`;
+}
+    
 </script>
 </body>
 
