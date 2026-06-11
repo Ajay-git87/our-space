@@ -225,6 +225,12 @@ font-size:.7rem;
 letter-spacing:2px;
 opacity:.7;
 }
+  .digit.animate{
+transform:translateY(-3px);
+box-shadow:
+0 0 25px rgba(236,72,153,.45);
+transition:.35s ease;
+}
 </style>
 
 </head>
@@ -354,23 +360,35 @@ Math.floor(totalSeconds/60)%60;
 const seconds =
 totalSeconds%60;
 
-document.getElementById("yearsDigit").innerText =
-String(years).padStart(2,"0");
+updateDigit(
+"yearsDigit",
+String(years).padStart(2,"0")
+);
 
-document.getElementById("monthsDigit").innerText =
-String(months).padStart(2,"0");
+updateDigit(
+"monthsDigit",
+String(months).padStart(2,"0")
+);
 
-document.getElementById("daysDigit").innerText =
-String(days).padStart(2,"0");
+updateDigit(
+"daysDigit",
+String(days).padStart(2,"0")
+);
 
-document.getElementById("hoursDigit").innerText =
-String(hours).padStart(2,"0");
+updateDigit(
+"hoursDigit",
+String(hours).padStart(2,"0")
+);
 
-document.getElementById("minutesDigit").innerText =
-String(minutes).padStart(2,"0");
+updateDigit(
+"minutesDigit",
+String(minutes).padStart(2,"0")
+);
 
-document.getElementById("secondsDigit").innerText =
-String(seconds).padStart(2,"0");
+updateDigit(
+"secondsDigit",
+String(seconds).padStart(2,"0")
+);
 
 }
 
@@ -380,7 +398,15 @@ setInterval(
 updateTogetherCounter,
 1000
 );
-
+function updateDigit(id,value){
+const el=document.getElementById(id);
+if(el.innerText !== value){
+el.innerText = value;
+el.classList.remove("animate");
+void el.offsetWidth;
+el.classList.add("animate");
+}
+}
 </script>
 </body>
 
