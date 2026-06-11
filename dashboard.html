@@ -133,6 +133,67 @@ transform:translateY(100vh);
 transform:translateY(-100px);
 }
 }
+  .countdown{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.flip-box{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.flip-box div{
+width:90px;
+height:90px;
+
+background:rgba(255,255,255,0.25);
+
+backdrop-filter:blur(10px);
+
+border-radius:20px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:2rem;
+font-weight:bold;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+transition:0.4s ease;
+}
+
+.flip-box span{
+margin-top:8px;
+font-size:0.8rem;
+letter-spacing:1px;
+}
+
+  .flip{
+animation:flipAnim .5s ease;
+}
+
+@keyframes flipAnim{
+
+0%{
+transform:rotateX(0deg);
+}
+
+50%{
+transform:rotateX(90deg);
+}
+
+100%{
+transform:rotateX(0deg);
+}
+
+}
 
 </style>
 </head>
@@ -192,8 +253,28 @@ Loading...
 
 <br>
 
-<div class="timer" id="anniversaryCountdown">
-Loading...
+<div class="countdown">
+
+<div class="flip-box">
+<div id="daysBox">00</div>
+<span>DAYS</span>
+</div>
+
+<div class="flip-box">
+<div id="hoursBox">00</div>
+<span>HOURS</span>
+</div>
+
+<div class="flip-box">
+<div id="minutesBox">00</div>
+<span>MINUTES</span>
+</div>
+
+<div class="flip-box">
+<div id="secondsBox">00</div>
+<span>SECONDS</span>
+</div>
+
 </div>
 
 </div>
@@ -294,11 +375,29 @@ const h = Math.floor((countdown%(1000*60*60*24))/(1000*60*60));
 const m = Math.floor((countdown%(1000*60*60))/(1000*60));
 const s = Math.floor((countdown%(1000*60))/1000);
 
-document.getElementById("anniversaryCountdown").innerText =
-`${d}D ${h}H ${m}M ${s}S`;
+updateBox("daysBox",d);
+updateBox("hoursBox",h);
+updateBox("minutesBox",m);
+updateBox("secondsBox",s);
+
+}
+function updateBox(id,value){
+
+const box=document.getElementById(id);
+
+if(box.innerText != value){
+
+box.classList.remove("flip");
+
+void box.offsetWidth;
+
+box.classList.add("flip");
+
+box.innerText=value;
 
 }
 
+}
 setInterval(updateCounters,1000);
 updateCounters();
 
