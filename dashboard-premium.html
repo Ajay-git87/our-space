@@ -111,7 +111,7 @@ z-index:10;
 }
 
 .hero h1{
-font-size:5rem;
+font-size:4rem;
 font-weight:800;
 letter-spacing:-2px;
 background:
@@ -166,13 +166,13 @@ rgba(236,72,153,.35);
 .card-large{
 grid-column:
 span 6;
-min-height:320px;
+min-height:260px;
 }
 
 .glass-card:not(.card-large){
 grid-column:
 span 6;
-min-height:220px;
+min-height:170px;
 }
 .glass-card h2{
 margin-bottom:25px;
@@ -188,7 +188,42 @@ span 12 !important;
 .hero h1{
 font-size:3rem;
 }
+}
+  .counter-row{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin-top:35px;
+}
 
+.unit{
+text-align:center;
+}
+
+.digit{
+font-family:'Orbitron',sans-serif;
+font-size:2.4rem;
+font-weight:700;
+width:90px;
+height:90px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+rgba(255,255,255,.04);
+border:
+1px solid rgba(255,255,255,.08);
+border-radius:18px;
+box-shadow:
+0 0 20px rgba(236,72,153,.08);
+}
+
+.label{
+margin-top:10px;
+font-size:.7rem;
+letter-spacing:2px;
+opacity:.7;
 }
 </style>
 
@@ -220,9 +255,39 @@ Since 27 August 2025
 <div class="glass-card card-large">
     <h2>❤️ Together</h2>
 
-    <div id="togetherCounter">
-        Loading...
-    </div>
+    <div class="counter-row">
+
+<div class="unit">
+<div class="digit" id="yearsDigit">00</div>
+<div class="label">YEARS</div>
+</div>
+
+<div class="unit">
+<div class="digit" id="monthsDigit">00</div>
+<div class="label">MONTHS</div>
+</div>
+
+<div class="unit">
+<div class="digit" id="daysDigit">00</div>
+<div class="label">DAYS</div>
+</div>
+
+<div class="unit">
+<div class="digit" id="hoursDigit">00</div>
+<div class="label">HOURS</div>
+</div>
+
+<div class="unit">
+<div class="digit" id="minutesDigit">00</div>
+<div class="label">MINUTES</div>
+</div>
+
+<div class="unit">
+<div class="digit" id="secondsDigit">00</div>
+<div class="label">SECONDS</div>
+</div>
+
+</div>
 </div>
 
 <div class="glass-card card-large">
