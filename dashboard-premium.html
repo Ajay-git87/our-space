@@ -315,6 +315,73 @@ Since 27 August 2025
 </div>
 
 </section>
+  <script>
+
+const startDate = new Date("2025-08-27T00:00:00");
+
+function updateTogetherCounter(){
+
+const now = new Date();
+
+let years = now.getFullYear() - startDate.getFullYear();
+let months = now.getMonth() - startDate.getMonth();
+let days = now.getDate() - startDate.getDate();
+
+if(days < 0){
+months--;
+days += new Date(
+now.getFullYear(),
+now.getMonth(),
+0
+).getDate();
+}
+
+if(months < 0){
+years--;
+months += 12;
+}
+
+const diff = now - startDate;
+
+const totalSeconds = Math.floor(diff/1000);
+
+const hours =
+Math.floor(totalSeconds/3600)%24;
+
+const minutes =
+Math.floor(totalSeconds/60)%60;
+
+const seconds =
+totalSeconds%60;
+
+document.getElementById("yearsDigit").innerText =
+String(years).padStart(2,"0");
+
+document.getElementById("monthsDigit").innerText =
+String(months).padStart(2,"0");
+
+document.getElementById("daysDigit").innerText =
+String(days).padStart(2,"0");
+
+document.getElementById("hoursDigit").innerText =
+String(hours).padStart(2,"0");
+
+document.getElementById("minutesDigit").innerText =
+String(minutes).padStart(2,"0");
+
+document.getElementById("secondsDigit").innerText =
+String(seconds).padStart(2,"0");
+
+}
+
+updateTogetherCounter();
+
+setInterval(
+updateTogetherCounter,
+1000
+);
+
+</script>
 </body>
 
 </html>
