@@ -489,7 +489,7 @@ updateDigit(
 String(minutes).padStart(2,"0")
 );
 
-rollSeconds(seconds);
+
 
 }
 
@@ -508,31 +508,39 @@ void el.offsetWidth;
 el.classList.add("animate");
 }
 }
-    function rollSeconds(value){
-const track =
-document.getElementById("secondsTrack");
-track.style.transform =
-`translateY(-${value*90}px)`;
-}
    let previousSecond = -1;
 
 function rollSeconds(value){
+console.log("ROLL", value);
 const track =
 document.getElementById("secondsTrack");
+
 track.style.transition =
 "transform .8s cubic-bezier(.22,1,.36,1)";
-track.style.transform =
-`translateY(-${value*90}px)`;
-if(previousSecond===59 && value===0){
+
+if(previousSecond === 59 && value === 0){
+
 track.style.transform =
 `translateY(-5400px)`;
+
 setTimeout(()=>{
+
 track.style.transition="none";
+
 track.style.transform=
 "translateY(0px)";
+
 },800);
+
+}else{
+
+track.style.transform =
+`translateY(-${value*90}px)`;
+
 }
-previousSecond=value;
+
+previousSecond = value;
+
 }
 </script>
 </body>
