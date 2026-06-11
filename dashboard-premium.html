@@ -398,7 +398,6 @@ Since 27 August 2025
 </div>
 
 </div>
-</div>
 
 <div class="glass-card card-large">
     <h2>🎉 Anniversary Countdown</h2>
@@ -489,12 +488,11 @@ updateDigit(
 String(minutes).padStart(2,"0")
 );
 
-
+rollSeconds(seconds);
 
 }
 
 updateTogetherCounter();
-
 setInterval(
 updateTogetherCounter,
 1000
@@ -511,7 +509,7 @@ el.classList.add("animate");
    let previousSecond = -1;
 
 function rollSeconds(value){
-console.log("ROLL", value);
+
 const track =
 document.getElementById("secondsTrack");
 
