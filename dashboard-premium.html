@@ -58,13 +58,156 @@ min-height:100vh;
 overflow-x:hidden;
 
 }
+.background-glow{
 
+position:fixed;
+
+width:500px;
+height:500px;
+
+border-radius:50%;
+
+filter:blur(140px);
+
+opacity:.20;
+
+pointer-events:none;
+
+}
+
+.glow1{
+
+background:#ec4899;
+
+top:-200px;
+left:-200px;
+
+}
+
+.glow2{
+
+background:#7c3aed;
+
+bottom:-200px;
+right:-200px;
+
+}
+
+  .navbar{
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+padding:25px;
+
+position:relative;
+z-index:10;
+
+}
+
+.navbar a{
+
+text-decoration:none;
+
+color:white;
+
+padding:12px 26px;
+
+background:var(--glass);
+
+border:1px solid var(--border);
+
+border-radius:50px;
+
+backdrop-filter:blur(12px);
+
+transition:.3s;
+
+}
+
+.navbar a:hover{
+
+transform:translateY(-3px);
+
+border-color:
+rgba(236,72,153,.5);
+
+box-shadow:
+0 0 20px rgba(236,72,153,.2);
+
+}
+
+  .hero{
+
+text-align:center;
+
+padding-top:40px;
+
+position:relative;
+z-index:10;
+
+}
+
+.hero h1{
+
+font-size:5rem;
+
+font-weight:800;
+
+letter-spacing:-2px;
+
+background:
+linear-gradient(
+90deg,
+white,
+#f472b6
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.hero p{
+
+margin-top:10px;
+
+font-size:1.1rem;
+
+opacity:.75;
+
+}
 </style>
 
 </head>
 
 <body>
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
 
+  <nav class="navbar">
+
+<a href="index.html">Home</a>
+
+<a href="Letters.html">Letters</a>
+
+<a href="gallery.html">Gallery</a>
+
+</nav>
+  
+  <section class="hero">
+<h1>
+Our Space
+</h1>
+
+<p>
+Since 27 August 2025
+</p>
+</section>
+  
 </body>
 
 </html>
