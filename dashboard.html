@@ -194,6 +194,34 @@ transform:rotateX(0deg);
 }
 
 }
+.counter-box{
+width:120px;
+text-align:center;
+}
+
+.roll-container{
+height:90px;
+overflow:hidden;
+position:relative;
+background:rgba(255,255,255,0.2);
+backdrop-filter:blur(15px);
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.roll-number{
+font-size:3rem;
+font-weight:700;
+height:90px;
+line-height:90px;
+transition:transform .6s cubic-bezier(.22,1,.36,1);
+}
+
+.counter-label{
+margin-top:10px;
+font-size:.9rem;
+letter-spacing:2px;
+}  
 
 </style>
 </head>
@@ -255,26 +283,32 @@ Loading...
 
 <div class="countdown">
 
-<div class="flip-box">
-<div id="daysBox">00</div>
-<span>DAYS</span>
+<div class="counter-box">
+<div class="roll-container">
+<div class="roll-number" id="daysRoll">0</div>
+</div>
+<div class="counter-label">DAYS</div>
 </div>
 
-<div class="flip-box">
-<div id="hoursBox">00</div>
-<span>HOURS</span>
+<div class="counter-box">
+<div class="roll-container">
+<div class="roll-number" id="hoursRoll">0</div>
+</div>
+<div class="counter-label">HOURS</div>
 </div>
 
-<div class="flip-box">
-<div id="minutesBox">00</div>
-<span>MINUTES</span>
+<div class="counter-box">
+<div class="roll-container">
+<div class="roll-number" id="minutesRoll">0</div>
+</div>
+<div class="counter-label">MINUTES</div>
 </div>
 
-<div class="flip-box">
-<div id="secondsBox">00</div>
-<span>SECONDS</span>
+<div class="counter-box">
+<div class="roll-container">
+<div class="roll-number" id="secondsRoll">0</div>
 </div>
-
+<div class="counter-label">SECONDS</div>
 </div>
 
 </div>
@@ -375,11 +409,10 @@ const h = Math.floor((countdown%(1000*60*60*24))/(1000*60*60));
 const m = Math.floor((countdown%(1000*60*60))/(1000*60));
 const s = Math.floor((countdown%(1000*60))/1000);
 
-updateBox("daysBox",d);
-updateBox("hoursBox",h);
-updateBox("minutesBox",m);
-updateBox("secondsBox",s);
-
+rollDigit("daysRoll",d);
+rollDigit("hoursRoll",h);
+rollDigit("minutesRoll",m);
+rollDigit("secondsRoll",s);
 }
 function updateBox(id,value){
 
@@ -420,6 +453,36 @@ heart.remove();
 }
 
 setInterval(createHeart,1200);
+
+  function rollDigit(id,value){
+
+const el=document.getElementById(id);
+
+if(el.dataset.oldValue==value) return;
+
+el.dataset.oldValue=value;
+
+el.style.transform="translateY(-100%)";
+
+setTimeout(()=>{
+
+el.innerHTML=value;
+
+el.style.transition="none";
+el.style.transform="translateY(100%)";
+
+requestAnimationFrame(()=>{
+
+el.style.transition=
+"transform .6s cubic-bezier(.22,1,.36,1)";
+
+el.style.transform="translateY(0%)";
+
+});
+
+},300);
+
+}
 
 </script>
 
