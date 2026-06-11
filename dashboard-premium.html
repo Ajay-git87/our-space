@@ -334,6 +334,8 @@ Since 27 August 2025
 <div>8</div>
 <div>9</div>
 
+<div>0</div>
+
 </div>
 
 </div>
@@ -459,7 +461,26 @@ document.getElementById("secondsTrack");
 track.style.transform =
 `translateY(-${value*90}px)`;
 }
-    
+    let previousSecond = -1;
+
+function rollSeconds(value){
+const track =
+document.getElementById("secondsTrack");
+track.style.transition =
+"transform .8s cubic-bezier(.22,1,.36,1)";
+track.style.transform =
+`translateY(-${value*90}px)`;
+if(previousSecond===9 && value===0){
+track.style.transform =
+`translateY(-900px)`;
+setTimeout(()=>{
+track.style.transition="none";
+track.style.transform=
+"translateY(0px)";
+},800);
+}
+previousSecond=value;
+}
 </script>
 </body>
 
