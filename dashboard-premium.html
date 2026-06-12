@@ -475,6 +475,34 @@ font-size:1rem;
 margin-top:20px;
 opacity:.75;
 }
+  .love-heart{
+display:inline-block;
+font-size:2rem;
+margin:0 4px;
+animation:
+heartGlow 2s infinite;
+}
+
+@keyframes heartGlow{
+0%{
+transform:scale(1);
+filter:drop-shadow(
+0 0 4px #ff4d6d
+);
+}
+50%{
+transform:scale(1.15);
+filter:drop-shadow(
+0 0 12px #ff4d6d
+);
+}
+100%{
+transform:scale(1);
+filter:drop-shadow(
+0 0 4px #ff4d6d
+);
+}
+}
 </style>
 </head>
 
@@ -820,57 +848,37 @@ function rollMinutes(value){
 
         track.style.transform =
         `translateY(-${value * 90}px)`;
-
     }
-
     previousMinute = value;
-
 }
 
 function rollSeconds(value){
-
     const track =
     document.getElementById("secondsTrack");
-
     if(!track) return;
-
     if(previousSecond === -1){
-
         track.style.transition = "none";
-
         track.style.transform =
         `translateY(-${value * 90}px)`;
-
         previousSecond = value;
-
         return;
-
     }
 
     track.style.transition =
     "transform .8s cubic-bezier(.22,1,.36,1)";
-
     if(previousSecond === 59 && value === 0){
-
         track.style.transform =
         "translateY(-5400px)";
-
         setTimeout(()=>{
-
             track.style.transition = "none";
-
             track.style.transform =
             "translateY(0px)";
-
         },800);
-
     }else{
-
         track.style.transform =
         `translateY(-${value * 90}px)`;
     }
     previousSecond = value;
-
 }
 
 function updateAnniversary(){
@@ -992,20 +1000,31 @@ value
 }
 
 function increaseLove(){
-
-let loveCount =
+let oldCount =
 getLoveCount();
-
-loveCount++;
-
+let loveCount =
+oldCount + 1;
 saveLoveCount(
 loveCount
 );
-
+const oldHearts =
+Math.floor(
+oldCount / 3000
+);
+const newHearts =
+Math.floor(
+loveCount / 3000
+);
+if(newHearts > oldHearts){
+alert(
+"❤️ NEW HEART UNLOCKED ❤️"
+);
+}
 renderLoveMeter();
-
 }
 
+renderLoveMeter();
+}
 function renderLoveMeter(){
 const totalLove =
 getLoveCount();
@@ -1042,8 +1061,17 @@ document.getElementById(
 "loveTotal"
 );
 if(!heartBox) return;
+let heartsHTML = "";
+for(let i=0;i<hearts;i++){
+heartsHTML += `
+<span class="love-heart">
+❤️
+</span>
+`;
+}
+
 heartBox.innerHTML =
-"❤️".repeat(hearts);
+heartsHTML;
 counter.innerHTML =
 `${current} / 3000`;
 progress.style.width =
