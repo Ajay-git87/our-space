@@ -353,6 +353,29 @@ font-size:1rem;
 line-height:1.8;
 }
 
+  /* ANNIVERSARY COUNTER CSS FILE*/
+  #anniversaryCounter{
+
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+margin-top:50px;
+font-family:'Orbitron',sans-serif;
+}
+
+.count-label{
+font-size:1.1rem;
+font-weight:600;
+opacity:.7;
+margin-right:10px;
+}
+
+.odometer-wrap{
+display:flex;
+justify-content:center;
+align-items:center;
+}
 </style>
 </head>
 
@@ -561,13 +584,46 @@ Since 27 August 2025
 </div>
   
 <div class="glass-card card-large">
-    <h2>🎉 Anniversary Countdown</h2>
 
-    <div id="anniversaryCounter">
-        Loading...
-    </div>
+<h2>🎉 Anniversary Countdown</h2>
+
+<div id="anniversaryCounter">
+
+<span class="odometer-wrap">
+<div class="digit-wheel">
+<div class="digit-track" id="annDays"></div>
+</div>
+</span>
+
+<span class="count-label">D</span>
+
+<span class="odometer-wrap">
+<div class="digit-wheel">
+<div class="digit-track" id="annHours"></div>
+</div>
+</span>
+
+<span class="count-label">H</span>
+
+<span class="odometer-wrap">
+<div class="digit-wheel">
+<div class="digit-track" id="annMinutes"></div>
+</div>
+</span>
+
+<span class="count-label">M</span>
+
+<span class="odometer-wrap">
+<div class="digit-wheel">
+<div class="digit-track" id="annSeconds"></div>
+</div>
+</span>
+
+<span class="count-label">S</span>
+
 </div>
 
+</div>
 <div class="glass-card">
     <h2>📊 Statistics</h2>
 
@@ -710,51 +766,55 @@ function rollSeconds(value){
 
 function updateAnniversary(){
 
-    const now = new Date();
+const now = new Date();
 
-    const diff =
-    anniversaryDate - now;
+const diff =
+anniversaryDate - now;
 
-    if(diff <= 0){
+if(diff <= 0){
 
-        document.getElementById(
-        "anniversaryCounter"
-        ).innerHTML =
-        "<h2>🎉 Happy Anniversary ❤️</h2>";
+document.getElementById(
+"anniversaryCounter"
+).innerHTML =
+"❤️ HAPPY ANNIVERSARY ❤️";
 
-        return;
-
-    }
-
-    const days =
-    Math.floor(diff / 86400000);
-
-    const hours =
-    Math.floor(
-    (diff % 86400000)
-    / 3600000
-    );
-
-    const minutes =
-    Math.floor(
-    (diff % 3600000)
-    / 60000
-    );
-
-    const seconds =
-    Math.floor(
-    (diff % 60000)
-    / 1000
-    );
-
-    document.getElementById(
-    "anniversaryCounter"
-    ).innerHTML =
-
-    `${days}D ${hours}H ${minutes}M ${seconds}S`;
+return;
 
 }
 
+const days =
+Math.floor(diff/86400000);
+
+const hours =
+Math.floor((diff%86400000)/3600000);
+
+const minutes =
+Math.floor((diff%3600000)/60000);
+
+const seconds =
+Math.floor((diff%60000)/1000);
+
+document.getElementById(
+"annDays"
+).style.transform =
+`translateY(-${days*90}px)`;
+
+document.getElementById(
+"annHours"
+).style.transform =
+`translateY(-${hours*90}px)`;
+
+document.getElementById(
+"annMinutes"
+).style.transform =
+`translateY(-${minutes*90}px)`;
+
+document.getElementById(
+"annSeconds"
+).style.transform =
+`translateY(-${seconds*90}px)`;
+
+}
 function updateStats(){
 
     const now = new Date();
@@ -772,7 +832,21 @@ function updateStats(){
     `<p>Total Days: ${totalDays}</p>`;
 
 }
-
+  function buildTrack(id,max){
+const track =
+document.getElementById(id);
+if(!track) return;
+let html = "";
+for(let i=0;i<=max;i++){
+html += `<div>${String(i).padStart(2,"0")}</div>`;
+}
+html += `<div>00</div>`;
+track.innerHTML = html;
+}
+buildTrack("annDays",365);
+buildTrack("annHours",23);
+buildTrack("annMinutes",59);
+buildTrack("annSeconds",59);
 function updateTogetherCounter(){
 
     const now = new Date();
