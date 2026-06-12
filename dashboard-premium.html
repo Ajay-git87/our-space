@@ -503,6 +503,33 @@ filter:drop-shadow(
 );
 }
 }
+  #heartPopup{
+position:fixed;
+top:50%;
+left:50%;
+transform:
+translate(-50%,-50%) scale(.8);
+padding:25px 40px;
+background:
+rgba(15,23,42,.95);
+border:
+1px solid rgba(236,72,153,.4);
+border-radius:20px;
+font-size:1.5rem;
+font-weight:700;
+color:white;
+z-index:9999;
+opacity:0;
+pointer-events:none;
+transition:.5s ease;
+box-shadow:
+0 0 40px rgba(236,72,153,.25);
+}
+#heartPopup.show{
+opacity:1;
+transform:
+translate(-50%,-50%) scale(1);
+}
 </style>
 </head>
 
@@ -1018,9 +1045,7 @@ Math.floor(
 loveCount / 3000
 );
 if(newHearts > oldHearts){
-alert(
-"❤️ NEW HEART UNLOCKED ❤️"
-);
+ashowHeartPopup();
 }
 renderLoveMeter();
 }
@@ -1081,6 +1106,22 @@ percentBox.innerHTML =
 percent.toFixed(1) + "%";
 totalBox.innerHTML =
 `Total Love: ${totalLove}`;
+}
+  
+  function showHeartPopup(){
+const popup =
+document.getElementById(
+"heartPopup"
+);
+if(!popup) return;
+popup.classList.add(
+"show"
+);
+setTimeout(()=>{
+popup.classList.remove(
+"show"
+);
+},2500);
 }
   
   function buildTrack(id,max){
