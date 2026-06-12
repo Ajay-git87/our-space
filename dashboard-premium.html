@@ -500,269 +500,263 @@ const startDate = new Date("2025-08-27T00:00:00");
 const anniversaryDate = new Date("2026-08-27T00:00:00");
 
 let previousSecond = -1;
+let previousMinute = -1;
 
-function updateDigit(id,value){
+function updateDigit(id, value){
 
-const el = document.getElementById(id);
+    const el = document.getElementById(id);
 
-if(!el) return;
+    if(!el) return;
 
-if(el.innerText !== value){
+    if(el.innerText !== value){
 
-el.innerText = value;
+        el.innerText = value;
 
-el.classList.remove("animate");
-void el.offsetWidth;
-el.classList.add("animate");
+        el.classList.remove("animate");
+        void el.offsetWidth;
+        el.classList.add("animate");
+
+    }
 
 }
+
+function rollMinutes(value){
+
+    const track =
+    document.getElementById("minutesTrack");
+
+    if(!track) return;
+
+    if(previousMinute === -1){
+
+        track.style.transition = "none";
+
+        track.style.transform =
+        `translateY(-${value * 90}px)`;
+
+        previousMinute = value;
+
+        return;
+
+    }
+
+    track.style.transition =
+    "transform .8s cubic-bezier(.22,1,.36,1)";
+
+    if(previousMinute === 59 && value === 0){
+
+        track.style.transform =
+        "translateY(-5400px)";
+
+        setTimeout(()=>{
+
+            track.style.transition = "none";
+
+            track.style.transform =
+            "translateY(0px)";
+
+        },800);
+
+    }else{
+
+        track.style.transform =
+        `translateY(-${value * 90}px)`;
+
+    }
+
+    previousMinute = value;
 
 }
 
 function rollSeconds(value){
 
-const track =
-document.getElementById("secondsTrack");
+    const track =
+    document.getElementById("secondsTrack");
 
-if(!track) return;
+    if(!track) return;
 
-if(previousSecond === -1){
+    if(previousSecond === -1){
 
-track.style.transition = "none";
+        track.style.transition = "none";
 
-track.style.transform =
-`translateY(-${value * 90}px)`;
+        track.style.transform =
+        `translateY(-${value * 90}px)`;
 
-previousSecond = value;
+        previousSecond = value;
 
-return;
+        return;
 
-}
-  let previousMinute = -1;
+    }
 
-function rollMinutes(value){
+    track.style.transition =
+    "transform .8s cubic-bezier(.22,1,.36,1)";
 
-const track =
-document.getElementById("minutesTrack");
+    if(previousSecond === 59 && value === 0){
 
-if(!track) return;
+        track.style.transform =
+        "translateY(-5400px)";
 
-if(previousMinute === -1){
+        setTimeout(()=>{
 
-track.style.transition = "none";
+            track.style.transition = "none";
 
-track.style.transform =
-`translateY(-${value * 90}px)`;
+            track.style.transform =
+            "translateY(0px)";
 
-previousMinute = value;
+        },800);
 
-return;
+    }else{
 
-}
+        track.style.transform =
+        `translateY(-${value * 90}px)`;
 
-track.style.transition =
-"transform .8s cubic-bezier(.22,1,.36,1)";
+    }
 
-if(previousMinute === 59 && value === 0){
-
-track.style.transform =
-"translateY(-5400px)";
-
-setTimeout(()=>{
-
-track.style.transition = "none";
-
-track.style.transform =
-"translateY(0px)";
-
-},800);
-
-}else{
-
-track.style.transform =
-`translateY(-${value * 90}px)`;
-
-}
-
-previousMinute = value;
-
-}
-
-track.style.transition =
-"transform .8s cubic-bezier(.22,1,.36,1)";
-
-if(previousSecond === 59 && value === 0){
-
-track.style.transform =
-"translateY(-5400px)";
-
-setTimeout(()=>{
-
-track.style.transition = "none";
-
-track.style.transform =
-"translateY(0px)";
-
-},800);
-
-}else{
-
-track.style.transform =
-`translateY(-${value * 90}px)`;
-
-}
-
-previousSecond = value;
-
-}
-
-function updateTogetherCounter(){
-
-const now = new Date();
-
-let years =
-now.getFullYear() -
-startDate.getFullYear();
-
-let months =
-now.getMonth() -
-startDate.getMonth();
-
-let days =
-now.getDate() -
-startDate.getDate();
-
-if(days < 0){
-
-months--;
-
-days += new Date(
-now.getFullYear(),
-now.getMonth(),
-0
-).getDate();
-
-}
-
-if(months < 0){
-
-years--;
-
-months += 12;
-
-}
-
-const diff =
-now - startDate;
-
-const totalSeconds =
-Math.floor(diff / 1000);
-
-const hours =
-Math.floor(totalSeconds / 3600) % 24;
-
-const minutes =
-Math.floor(totalSeconds / 60) % 60;
-
-const seconds =
-totalSeconds % 60;
-
-updateDigit(
-"yearsDigit",
-String(years).padStart(2,"0")
-);
-
-updateDigit(
-"monthsDigit",
-String(months).padStart(2,"0")
-);
-
-updateDigit(
-"daysDigit",
-String(days).padStart(2,"0")
-);
-
-updateDigit(
-"hoursDigit",
-String(hours).padStart(2,"0")
-);
-
-rollMinutes(minutes);
-
-rollSeconds(seconds);
-
-updateAnniversary();
-updateStats();
+    previousSecond = value;
 
 }
 
 function updateAnniversary(){
 
-const now = new Date();
+    const now = new Date();
 
-const diff =
-anniversaryDate - now;
+    const diff =
+    anniversaryDate - now;
 
-if(diff <= 0){
+    if(diff <= 0){
 
-document.getElementById(
-"anniversaryCounter"
-).innerHTML =
-"<h2>🎉 Happy Anniversary ❤️</h2>";
+        document.getElementById(
+        "anniversaryCounter"
+        ).innerHTML =
+        "<h2>🎉 Happy Anniversary ❤️</h2>";
 
-return;
+        return;
 
-}
+    }
 
-const days =
-Math.floor(diff / 86400000);
+    const days =
+    Math.floor(diff / 86400000);
 
-const hours =
-Math.floor(
-(diff % 86400000)
-/
-3600000
-);
+    const hours =
+    Math.floor(
+    (diff % 86400000)
+    / 3600000
+    );
 
-const minutes =
-Math.floor(
-(diff % 3600000)
-/
-60000
-);
+    const minutes =
+    Math.floor(
+    (diff % 3600000)
+    / 60000
+    );
 
-const seconds =
-Math.floor(
-(diff % 60000)
-/
-1000
-);
+    const seconds =
+    Math.floor(
+    (diff % 60000)
+    / 1000
+    );
 
-document.getElementById(
-"anniversaryCounter"
-).innerHTML =
+    document.getElementById(
+    "anniversaryCounter"
+    ).innerHTML =
 
-`${days}D ${hours}H ${minutes}M ${seconds}S`;
+    `${days}D ${hours}H ${minutes}M ${seconds}S`;
 
 }
 
 function updateStats(){
 
-const now = new Date();
+    const now = new Date();
 
-const diff =
-now - startDate;
+    const diff =
+    now - startDate;
 
-const totalDays =
-Math.floor(diff / 86400000);
+    const totalDays =
+    Math.floor(diff / 86400000);
 
-document.getElementById(
-"statsPanel"
-).innerHTML =
+    document.getElementById(
+    "statsPanel"
+    ).innerHTML =
 
-`
-<p>Total Days: ${totalDays}</p>
-`;
+    `<p>Total Days: ${totalDays}</p>`;
+
+}
+
+function updateTogetherCounter(){
+
+    const now = new Date();
+
+    let years =
+    now.getFullYear() -
+    startDate.getFullYear();
+
+    let months =
+    now.getMonth() -
+    startDate.getMonth();
+
+    let days =
+    now.getDate() -
+    startDate.getDate();
+
+    if(days < 0){
+
+        months--;
+
+        days += new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        0
+        ).getDate();
+
+    }
+
+    if(months < 0){
+
+        years--;
+
+        months += 12;
+
+    }
+
+    const diff =
+    now - startDate;
+
+    const totalSeconds =
+    Math.floor(diff / 1000);
+
+    const hours =
+    Math.floor(totalSeconds / 3600) % 24;
+
+    const minutes =
+    Math.floor(totalSeconds / 60) % 60;
+
+    const seconds =
+    totalSeconds % 60;
+
+    updateDigit(
+    "yearsDigit",
+    String(years).padStart(2,"0")
+    );
+
+    updateDigit(
+    "monthsDigit",
+    String(months).padStart(2,"0")
+    );
+
+    updateDigit(
+    "daysDigit",
+    String(days).padStart(2,"0")
+    );
+
+    updateDigit(
+    "hoursDigit",
+    String(hours).padStart(2,"0")
+    );
+
+    rollMinutes(minutes);
+    rollSeconds(seconds);
+
+    updateAnniversary();
+    updateStats();
 
 }
 
