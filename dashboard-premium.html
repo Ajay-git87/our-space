@@ -260,9 +260,6 @@ font-family:'Orbitron',sans-serif;
 font-size:2.8rem;
 font-weight:700;
 }
-  .digit-track{
-outline:2px solid red;
-}
 </style>
 
 </head>
@@ -424,44 +421,130 @@ Since 27 August 2025
 </div>
 
 </section>
-  <script>
+  
+<script>
 
 const startDate = new Date("2025-08-27T00:00:00");
+const anniversaryDate = new Date("2026-08-27T00:00:00");
+
+let previousSecond = -1;
+
+function updateDigit(id,value){
+
+const el = document.getElementById(id);
+
+if(!el) return;
+
+if(el.innerText !== value){
+
+el.innerText = value;
+
+el.classList.remove("animate");
+void el.offsetWidth;
+el.classList.add("animate");
+
+}
+
+}
+
+function rollSeconds(value){
+
+const track =
+document.getElementById("secondsTrack");
+
+if(!track) return;
+
+if(previousSecond === -1){
+
+track.style.transition = "none";
+
+track.style.transform =
+`translateY(-${value * 90}px)`;
+
+previousSecond = value;
+
+return;
+
+}
+
+track.style.transition =
+"transform .8s cubic-bezier(.22,1,.36,1)";
+
+if(previousSecond === 59 && value === 0){
+
+track.style.transform =
+"translateY(-5400px)";
+
+setTimeout(()=>{
+
+track.style.transition = "none";
+
+track.style.transform =
+"translateY(0px)";
+
+},800);
+
+}else{
+
+track.style.transform =
+`translateY(-${value * 90}px)`;
+
+}
+
+previousSecond = value;
+
+}
 
 function updateTogetherCounter(){
 
 const now = new Date();
 
-let years = now.getFullYear() - startDate.getFullYear();
-let months = now.getMonth() - startDate.getMonth();
-let days = now.getDate() - startDate.getDate();
+let years =
+now.getFullYear() -
+startDate.getFullYear();
+
+let months =
+now.getMonth() -
+startDate.getMonth();
+
+let days =
+now.getDate() -
+startDate.getDate();
 
 if(days < 0){
+
 months--;
+
 days += new Date(
 now.getFullYear(),
 now.getMonth(),
 0
 ).getDate();
+
 }
 
 if(months < 0){
+
 years--;
+
 months += 12;
+
 }
 
-const diff = now - startDate;
+const diff =
+now - startDate;
 
-const totalSeconds = Math.floor(diff/1000);
+const totalSeconds =
+Math.floor(diff / 1000);
 
 const hours =
-Math.floor(totalSeconds/3600)%24;
+Math.floor(totalSeconds / 3600) % 24;
 
 const minutes =
-Math.floor(totalSeconds/60)%60;
+Math.floor(totalSeconds / 60) % 60;
 
 const seconds =
-totalSeconds%60;
+totalSeconds % 60;
 
 updateDigit(
 "yearsDigit",
@@ -490,50 +573,88 @@ String(minutes).padStart(2,"0")
 
 rollSeconds(seconds);
 
+updateAnniversary();
+updateStats();
+
+}
+
+function updateAnniversary(){
+
+const now = new Date();
+
+const diff =
+anniversaryDate - now;
+
+if(diff <= 0){
+
+document.getElementById(
+"anniversaryCounter"
+).innerHTML =
+"<h2>🎉 Happy Anniversary ❤️</h2>";
+
+return;
+
+}
+
+const days =
+Math.floor(diff / 86400000);
+
+const hours =
+Math.floor(
+(diff % 86400000)
+/
+3600000
+);
+
+const minutes =
+Math.floor(
+(diff % 3600000)
+/
+60000
+);
+
+const seconds =
+Math.floor(
+(diff % 60000)
+/
+1000
+);
+
+document.getElementById(
+"anniversaryCounter"
+).innerHTML =
+
+`${days}D ${hours}H ${minutes}M ${seconds}S`;
+
+}
+
+function updateStats(){
+
+const now = new Date();
+
+const diff =
+now - startDate;
+
+const totalDays =
+Math.floor(diff / 86400000);
+
+document.getElementById(
+"statsPanel"
+).innerHTML =
+
+`
+<p>Total Days: ${totalDays}</p>
+`;
+
 }
 
 updateTogetherCounter();
+
 setInterval(
 updateTogetherCounter,
 1000
 );
-function updateDigit(id,value){
-const el=document.getElementById(id);
-if(el.innerText !== value){
-el.innerText = value;
-el.classList.remove("animate");
-void el.offsetWidth;
-el.classList.add("animate");
-}
-}
-  let previousSecond = -1;
-function rollSeconds(value){
-const track =
-document.getElementById("secondsTrack");
-if(!track) return;
-if(previousSecond === -1){
-track.style.transition="none";
-track.style.transform =
-`translateY(-${value*90}px)`;
-previousSecond = value;
-return;
-}
-track.style.transition =
-"transform .8s cubic-bezier(.22,1,.36,1)";
-if(previousSecond === 59 && value === 0){
-track.style.transform =
-"translateY(-5400px)";
-setTimeout(()=>{
-track.style.transition="none";
-track.style.transform=
-"translateY(0px)";
-},800);
-}else{
-track.style.transform =
-`translateY(-${value*90}px)`;
-}
-previousSecond = value;
-}
+
 </script>
 </body>
 
