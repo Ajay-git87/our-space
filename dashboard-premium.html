@@ -562,6 +562,44 @@ translateY(-120px)
 scale(1.8);
 }
 }
+  /*DISTANCE TAB*/
+  .distance-panel{
+text-align:center;
+padding:10px;
+}
+.distance-cities{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:15px;
+margin-top:20px;
+font-size:1.1rem;
+font-weight:600;
+}
+.distance-heart{
+font-size:1.5rem;
+animation:
+heartGlow 2s infinite;
+}
+.distance-value{
+font-family:'Orbitron',sans-serif;
+font-size:2.3rem;
+font-weight:700;
+margin:25px 0;
+color:white;
+}
+.distance-line{
+margin:20px 0;
+font-size:1.3rem;
+letter-spacing:2px;
+}
+.distance-stats{
+margin-top:25px;
+display:flex;
+flex-direction:column;
+gap:12px;
+opacity:.85;
+}
 </style>
 </head>
 
@@ -1032,11 +1070,24 @@ renderLoveMeter();
 }else{
 buttons[1].classList.add("active");
 content.innerHTML = `
-<div style="text-align:center">
-<h3>📍 Distance</h3>
-<p>
-Distance Meter Coming Soon
-</p>
+<div class="distance-panel">
+<h3>📍 DISTANCE</h3>
+<div class="distance-cities">
+<span>🇵🇱 Kraków</span>
+<span class="distance-heart">❤️</span>
+<span>🇮🇳 Surat</span>
+</div>
+<div class="distance-value">
+5950 KM
+</div>
+<div class="distance-line">
+🇵🇱━━━━━━❤️━━━━━━🇮🇳
+</div>
+<div class="distance-stats">
+<div>✈️ Flight Time: ~8 Hours</div>
+<div>🌍 Earth Distance: 14.8%</div>
+<div>❤️ Emotional Distance: 0 KM</div>
+</div>
 </div>
 `;
 }
