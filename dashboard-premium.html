@@ -503,32 +503,34 @@ filter:drop-shadow(
 );
 }
 }
-  #heartPopup{
-position:fixed;
-top:50%;
-left:50%;
-transform:
-translate(-50%,-50%) scale(.8);
-padding:25px 40px;
-background:
-rgba(15,23,42,.95);
-border:
-1px solid rgba(236,72,153,.4);
-border-radius:20px;
-font-size:1.5rem;
-font-weight:700;
-color:white;
-z-index:9999;
-opacity:0;
-pointer-events:none;
-transition:.5s ease;
-box-shadow:
-0 0 40px rgba(236,72,153,.25);
-}
+ 
 #heartPopup.show{
 opacity:1;
 transform:
 translate(-50%,-50%) scale(1);
+}
+
+  .floating-heart{
+position:fixed;
+font-size:2rem;
+pointer-events:none;
+z-index:9999;
+animation:
+floatHeart 1.5s ease-out forwards;
+}
+@keyframes floatHeart{
+0%{
+opacity:1;
+transform:
+translateY(0)
+scale(1);
+}
+100%{
+opacity:0;
+transform:
+translateY(-120px)
+scale(1.8);
+}
 }
 </style>
 </head>
@@ -805,9 +807,7 @@ onclick="showStatsTab('distance')">
         Future Home For Letters & Memories
     </div>
 </div>
-<div id="heartPopup" class="">
-❤️ NEW HEART UNLOCKED ❤️
-</div>
+
 </section>
   
 <script>
@@ -1045,7 +1045,7 @@ Math.floor(
 loveCount / 3000
 );
 if(newHearts > oldHearts){
-ashowHeartPopup();
+spawnHeart();
 }
 renderLoveMeter();
 }
@@ -1108,20 +1108,29 @@ totalBox.innerHTML =
 `Total Love: ${totalLove}`;
 }
   
-  function showHeartPopup(){
-const popup =
-document.getElementById(
-"heartPopup"
+function spawnHeart(){
+const heart =
+document.createElement("div");
+heart.className =
+"floating-heart";
+heart.innerHTML =
+"❤️";
+const button =
+document.querySelector(
+".love-btn"
 );
-if(!popup) return;
-popup.classList.add(
-"show"
+const rect =
+button.getBoundingClientRect();
+heart.style.left =
+(rect.left + rect.width/2) + "px";
+heart.style.top =
+(rect.top + window.scrollY) + "px";
+document.body.appendChild(
+heart
 );
 setTimeout(()=>{
-popup.classList.remove(
-"show"
-);
-},2500);
+heart.remove();
+},1500);
 }
   
   function buildTrack(id,max){
