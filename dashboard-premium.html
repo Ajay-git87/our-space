@@ -442,13 +442,43 @@ background:
 linear-gradient(
 90deg,
 #ec4899,
-#f472b6
+#f472b6,
+#ff8fab
 );
-
+background-size:
+200% 100%;
+animation:
+loveFlow 3s linear infinite;
 transition:
-width .5s ease;
+width .6s ease;
+box-shadow:
+0 0 15px rgba(236,72,153,.5);
 }
-
+  @keyframes loveFlow{
+0%{
+background-position:
+0% 0%;
+}
+100%{
+background-position:
+200% 0%;
+}
+}
+  .counter-pulse{
+animation:
+counterPulse .5s ease;
+}
+@keyframes counterPulse{
+0%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.15);
+}
+100%{
+transform:scale(1);
+}
+}
 #lovePercent{
 margin-top:12px;
 font-weight:600;
@@ -1095,6 +1125,14 @@ heartsHTML += `
 ❤️
 </span>
 `;
+  /*UPDATED*/
+  counter.classList.remove(
+"counter-pulse"
+);
+void counter.offsetWidth;
+counter.classList.add(
+"counter-pulse"
+);
 }
 
 heartBox.innerHTML =
