@@ -915,15 +915,7 @@ document.getElementById(
 
 }
 function updateStats(){
-    const now = new Date();
-    const diff =
-    now - startDate;
-    const totalDays =
-    Math.floor(diff / 86400000);
-    document.getElementById(
-    "statsPanel"
-    ).innerHTML =
-    `<p>Total Days: ${totalDays}</p>`;
+    return;
 }
 
   /*STATISTICS FUNCTION LOVE METER*/
@@ -1152,7 +1144,7 @@ function updateTogetherCounter(){
     rollSeconds(seconds);
 
     updateAnniversary();
-    updateStats();
+  
 
 }
 
