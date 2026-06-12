@@ -1110,7 +1110,6 @@ totalBox.innerHTML =
 }
   
 function spawnHeart(){
-  console.log("HEART SPAWNED");
 const heart =
 document.createElement("div");
 heart.className =
@@ -1118,21 +1117,19 @@ heart.className =
 heart.innerHTML =
 "❤️";
 const button =
-document.querySelector(
-".love-btn"
-);
+document.querySelector(".love-btn");
+if(!button) return;
 const rect =
 button.getBoundingClientRect();
 heart.style.left =
-(rect.left + rect.width/2) + "px";
+(rect.left + rect.width/2 + (Math.random()*30-15)) + "px";
 heart.style.top =
-(rect.top + window.scrollY) + "px";
-document.body.appendChild(
-heart
-);
+(rect.top + 20) + "px";
+document.body.appendChild(heart);
 setTimeout(()=>{
 heart.remove();
 },1500);
+
 }
   
   function buildTrack(id,max){
