@@ -232,23 +232,38 @@ box-shadow:
 transition:.35s ease;
 }
 
-  .digit-wheel{
+.digit-wheel{
 width:90px;
 height:90px;
 overflow:hidden;
 border-radius:18px;
+
 background:
 rgba(255,255,255,.04);
+
 border:
 1px solid rgba(255,255,255,.08);
-border-radius:18px;
+
+position:relative;
+
 box-shadow:
-0 0 20px rgba(236,72,153,.08);
+0 0 12px rgba(236,72,153,.15),
+0 0 30px rgba(236,72,153,.10),
+inset 0 0 12px rgba(255,255,255,.03);
 
 transition:
 all .35s ease;
 }
 
+.digit-wheel:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+0 0 18px rgba(236,72,153,.30),
+0 0 45px rgba(236,72,153,.18);
+
+}
 .digit-track{
 position:absolute;
 width:100%;
