@@ -52,6 +52,7 @@ color:white;
 min-height:100vh;
 overflow-x:hidden;
 }
+
 .background-glow{
 position:fixed;
 width:500px;
@@ -74,7 +75,7 @@ bottom:-200px;
 right:-200px;
 }
 
-  .navbar{
+.navbar{
 display:flex;
 justify-content:center;
 gap:18px;
@@ -92,7 +93,6 @@ border:1px solid var(--border);
 border-radius:50px;
 backdrop-filter:blur(12px);
 transition:.3s;
-
 }
 
 .navbar a:hover{
@@ -103,7 +103,7 @@ box-shadow:
 0 0 20px rgba(236,72,153,.2);
 }
 
-  .hero{
+.hero{
 text-align:center;
 padding-top:40px;
 position:relative;
@@ -130,7 +130,7 @@ font-size:1.1rem;
 opacity:.75;
 }
 
-  .dashboard-grid{
+.dashboard-grid{
 max-width:1400px;
 margin:60px auto;
 padding:20px;
@@ -145,20 +145,27 @@ z-index:10;
 .glass-card{
 background:
 rgba(255,255,255,.04);
+
 border:
 1px solid rgba(255,255,255,.08);
+
 backdrop-filter:
 blur(20px);
+
 border-radius:28px;
+
 padding:30px;
+
 box-shadow:
 0 20px 40px rgba(0,0,0,.35);
+
 transition:.4s;
 }
 
 .glass-card:hover{
 transform:
 translateY(-6px);
+
 border-color:
 rgba(236,72,153,.35);
 }
@@ -166,30 +173,38 @@ rgba(236,72,153,.35);
 .card-large{
 grid-column:
 span 6;
+
 min-height:260px;
 }
 
 .glass-card:not(.card-large){
 grid-column:
 span 6;
+
 min-height:170px;
 }
+
 .glass-card h2{
 margin-bottom:25px;
 font-size:1.4rem;
 font-weight:700;
 }
-  @media(max-width:900px){
+
+@media(max-width:900px){
+
 .card-large,
 .glass-card{
 grid-column:
 span 12 !important;
 }
+
 .hero h1{
 font-size:3rem;
 }
+
 }
-  .counter-row{
+
+.counter-row{
 display:flex;
 justify-content:center;
 gap:12px;
@@ -201,41 +216,70 @@ margin-top:35px;
 text-align:center;
 }
 
-.digit{
-font-family:'Orbitron',sans-serif;
-font-size:2.4rem;
-font-weight:700;
-width:90px;
-height:90px;
-display:flex;
-justify-content:center;
-align-items:center;
-background:
-rgba(255,255,255,.04);
-border:
-1px solid rgba(255,255,255,.08);
-border-radius:18px;
-box-shadow:
-0 0 20px rgba(236,72,153,.08);
-}
-
 .label{
 margin-top:10px;
 font-size:.7rem;
 letter-spacing:2px;
 opacity:.7;
 }
-  .digit.animate{
-transform:translateY(-3px);
+
+/* NORMAL DIGITS */
+
+.digit{
+font-family:'Orbitron',sans-serif;
+font-size:2.4rem;
+font-weight:700;
+
+width:90px;
+height:90px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
 box-shadow:
-0 0 25px rgba(236,72,153,.45);
+0 0 12px rgba(236,72,153,.15),
+0 0 30px rgba(236,72,153,.10),
+inset 0 0 12px rgba(255,255,255,.03);
+
+color:white;
+
+text-shadow:
+0 0 10px rgba(255,255,255,.15);
+}
+
+.digit.animate{
+
+transform:
+translateY(-3px);
+
+box-shadow:
+0 0 18px rgba(236,72,153,.25),
+0 0 40px rgba(236,72,153,.15),
+inset 0 0 12px rgba(255,255,255,.03);
+
 transition:.35s ease;
 }
 
+/* ROLLING WHEELS */
+
 .digit-wheel{
+
 width:90px;
 height:90px;
+
 overflow:hidden;
+
+position:relative;
+
 border-radius:18px;
 
 background:
@@ -244,44 +288,72 @@ rgba(255,255,255,.04);
 border:
 1px solid rgba(255,255,255,.08);
 
-position:relative;
-
 box-shadow:
 0 0 12px rgba(236,72,153,.15),
 0 0 30px rgba(236,72,153,.10),
 inset 0 0 12px rgba(255,255,255,.03);
-
-transition:
-all .35s ease;
 }
 
-.digit-wheel:hover{
-
-transform:translateY(-2px);
-
-box-shadow:
-0 0 18px rgba(236,72,153,.30),
-0 0 45px rgba(236,72,153,.18);
-
-}
 .digit-track{
+
 position:absolute;
+top:0;
+left:0;
+
 width:100%;
+
 transition:
 transform .8s cubic-bezier(.22,1,.36,1);
+
+will-change:transform;
 }
 
 .digit-track div{
+
 height:90px;
+width:100%;
+
 display:flex;
 justify-content:center;
 align-items:center;
+
 font-family:'Orbitron',sans-serif;
 font-size:2.8rem;
 font-weight:700;
-}
-</style>
 
+color:white;
+
+text-shadow:
+0 0 10px rgba(255,255,255,.15);
+}
+
+/* STATS */
+
+#statsPanel{
+font-size:1rem;
+line-height:1.8;
+}
+
+/* ANNIVERSARY */
+
+#anniversaryCounter{
+font-family:'Orbitron',sans-serif;
+font-size:2rem;
+font-weight:700;
+text-align:center;
+margin-top:40px;
+color:white;
+}
+
+/* MEMORY VAULT */
+
+.memory-placeholder{
+opacity:.7;
+font-size:1rem;
+line-height:1.8;
+}
+
+</style>
 </head>
 
 <body>
