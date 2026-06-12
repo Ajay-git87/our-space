@@ -637,6 +637,141 @@ left:calc(100% - 24px);
 left:0;
 }
 }
+  .distance-panel{
+position:relative;
+overflow:hidden;
+}
+.distance-particles{
+position:absolute;
+inset:0;
+pointer-events:none;
+}
+.distance-particles span{
+position:absolute;
+width:4px;
+height:4px;
+border-radius:50%;
+background:
+rgba(244,114,182,.8);
+box-shadow:
+0 0 10px rgba(244,114,182,.8);
+animation:
+floatParticle 8s linear infinite;
+}
+  .distance-particles span:nth-child(1){
+left:10%;
+top:80%;
+animation-delay:0s;
+}
+
+.distance-particles span:nth-child(2){
+left:20%;
+top:60%;
+animation-delay:1s;
+}
+
+.distance-particles span:nth-child(3){
+left:35%;
+top:90%;
+animation-delay:2s;
+}
+
+.distance-particles span:nth-child(4){
+left:50%;
+top:75%;
+animation-delay:3s;
+}
+
+.distance-particles span:nth-child(5){
+left:65%;
+top:85%;
+animation-delay:4s;
+}
+
+.distance-particles span:nth-child(6){
+left:78%;
+top:70%;
+animation-delay:5s;
+}
+
+.distance-particles span:nth-child(7){
+left:88%;
+top:90%;
+animation-delay:6s;
+}
+
+.distance-particles span:nth-child(8){
+left:95%;
+top:65%;
+animation-delay:7s;
+}
+  .distance-particles span:nth-child(1){
+left:10%;
+top:80%;
+animation-delay:0s;
+}
+
+.distance-particles span:nth-child(2){
+left:20%;
+top:60%;
+animation-delay:1s;
+}
+
+.distance-particles span:nth-child(3){
+left:35%;
+top:90%;
+animation-delay:2s;
+}
+
+.distance-particles span:nth-child(4){
+left:50%;
+top:75%;
+animation-delay:3s;
+}
+
+.distance-particles span:nth-child(5){
+left:65%;
+top:85%;
+animation-delay:4s;
+}
+
+.distance-particles span:nth-child(6){
+left:78%;
+top:70%;
+animation-delay:5s;
+}
+
+.distance-particles span:nth-child(7){
+left:88%;
+top:90%;
+animation-delay:6s;
+}
+
+.distance-particles span:nth-child(8){
+left:95%;
+top:65%;
+animation-delay:7s;
+}
+  @keyframes floatParticle{
+0%{
+transform:
+translateY(0px)
+scale(.5);
+opacity:0;
+}
+20%{
+opacity:.8;
+}
+80%{
+opacity:.8;
+}
+100%{
+transform:
+translateY(-120px)
+scale(1.2);
+opacity:0;
+}
+}
 </style>
 </head>
 
@@ -1108,6 +1243,16 @@ renderLoveMeter();
 buttons[1].classList.add("active");
 content.innerHTML = `
 <div class="distance-panel">
+<div class="distance-particles">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
 <h3>📍 DISTANCE</h3>
 <div class="distance-cities">
 <span>🇵🇱 Kraków</span>
