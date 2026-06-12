@@ -260,6 +260,9 @@ font-family:'Orbitron',sans-serif;
 font-size:2.8rem;
 font-weight:700;
 }
+  .digit-track{
+outline:2px solid red;
+}
 </style>
 
 </head>
@@ -319,9 +322,9 @@ Since 27 August 2025
 
 <div class="unit">
 
-<div class="digit-wheel">
+    <div class="digit-wheel">
 
-<div class="digit-track" id="secondsTrack">
+        <div class="digit-track" id="secondsTrack">
 
 <div>00</div>
 <div>01</div>
@@ -385,18 +388,12 @@ Since 27 August 2025
 <div>59</div>
 <div>00</div>
 
-</div>
+ </div>
 
-</div>
+    </div>
 
-</div>
+    <div class="label">SECONDS</div>
 
-</div>
-
-<div class="label">SECONDS</div>
-
-</div>
-  </div>
 </div>
 
 <div class="glass-card card-large">
@@ -506,39 +503,33 @@ void el.offsetWidth;
 el.classList.add("animate");
 }
 }
-   let previousSecond = -1;
-
+  let previousSecond = -1;
 function rollSeconds(value){
-
 const track =
 document.getElementById("secondsTrack");
-
-track.style.transition =
-"transform .8s cubic-bezier(.22,1,.36,1)";
-
-if(previousSecond === 59 && value === 0){
-
-track.style.transform =
-`translateY(-5400px)`;
-
-setTimeout(()=>{
-
+if(!track) return;
+if(previousSecond === -1){
 track.style.transition="none";
-
-track.style.transform=
-"translateY(0px)";
-
-},800);
-
-}else{
-
 track.style.transform =
 `translateY(-${value*90}px)`;
-
-}
-
 previousSecond = value;
-
+return;
+}
+track.style.transition =
+"transform .8s cubic-bezier(.22,1,.36,1)";
+if(previousSecond === 59 && value === 0){
+track.style.transform =
+"translateY(-5400px)";
+setTimeout(()=>{
+track.style.transition="none";
+track.style.transform=
+"translateY(0px)";
+},800);
+}else{
+track.style.transform =
+`translateY(-${value*90}px)`;
+}
+previousSecond = value;
 }
 </script>
 </body>
